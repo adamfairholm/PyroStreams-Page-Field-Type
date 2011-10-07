@@ -15,4 +15,4 @@ After being assigned to a stream, the following variables are available in your 
 |{slug.slug}|Page URI slug|
 |{slug.title}|Page title|
 |{slug.id}|Page ID|
-|{slug.status}|Page status (Draft, Live)|
+|{slug.status}|Page status (draft or live)|
