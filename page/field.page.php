@@ -66,13 +66,13 @@ class Field_page
 	
 		// Get the page
 		$this->CI = get_instance();
-		$obj = $this->CI->db->select('title')->limit(1)->where('id', $input)->get('pages');
+		$obj = $this->CI->db->select('id, title')->limit(1)->where('id', $input)->get('pages');
 
 		if($obj->num_rows() == 0) return;
 		
 		$row = $obj->row();
 		
-		return $row->title;
+		return '<a href="'.site_url('admin/pages/edit/'.$row->id).'">'.$row->title.'</a>';
 	}
 
 	// --------------------------------------------------------------------------
