@@ -1,18 +1,18 @@
-h1. PyroStreams Page Field Type
+h1. PyroStreams Page Field Type v1.1
 
 This field type allows you to select a page from your PyroCMS page tree as a PyroStreams field.
 
 h2. Installation
 
-If none exists, create a _field_types_ folder in either _addons/default_ or _addons/shared_addons_ (whichever add-on folder you have PyroStreams installed in). Add the _page_ folder into the _field_types_ folder.
+If none exists, create a _field_types_ folder in either _addons/<site-name> or _addons/shared_addons_. Add the _page_ folder into the _field_types_ folder.
 
 h2. Usage
 
 After being assigned to a stream, the following variables are available in your layouts:
 
 |_. Variable |_. Notes |
-|{field_slug}|Full URL to the page|
-|{field_slug.slug}|Page URI slug|
-|{field_slug.title}|Page title|
-|{field_slug.id}|Page ID|
-|{field_slug.status}|Page status (draft or live)|
+|{field_slug:link}|Full URL to the page|
+|{field_slug:slug}|Page URI slug|
+|{field_slug:title}|Page title|
+|{field_slug:id}|Page ID|
+|{field_slug:status}|Page status (draft or live)|
