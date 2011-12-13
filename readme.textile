@@ -2,6 +2,15 @@ h1. PyroStreams Page Field Type v1.1
 
 This field type allows you to select a page from your PyroCMS page tree as a PyroStreams field.
 
+h2. Changelog
+
+_1.1 - December 13, 2011_
+
+* [Updated] Updated to be compatible with PyroCMS 2.0 and PyroStreams 2.1
+* [New] Added drop down that displays page hierarchy.
+* [New] Added a link to the PyroCMS page edit page when displaying page name on the back end.
+* [Improvement] Field now obeys is_required setting for assignment.
+
 h2. Installation
 
 If none exists, create a _field_types_ folder in either _addons/<site-name> or _addons/shared_addons_. Add the _page_ folder into the _field_types_ folder.
