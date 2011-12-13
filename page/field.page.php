@@ -3,20 +3,25 @@
 /**
  * PyroStreams Page Field Type
  *
+ * Choose a page and return page data
+ *
  * @package		PyroStreams
  * @author		Parse19
  * @copyright	Copyright (c) 2011, Parse19
  */
 class Field_page
 {
-	public $field_type_name 		= 'Page';
-	
+
+	// --------------------------------------------------------------------------
+	 
 	public $field_type_slug			= 'page';
 	
 	public $db_col_type				= 'int';
-	
-	// --------------------------------------------------------------------------
 
+	public $version					= '1.1';
+
+	public $author					= array('name' => 'Parse19', 'url' => 'http://parse19.com');
+	
 	// --------------------------------------------------------------------------
 
 	/**
@@ -26,14 +31,14 @@ class Field_page
 	 * @param	array
 	 * @return	string
 	 */
-	public function form_output( $data )
+	public function form_output($data)
 	{
 		$this->CI = get_instance();
 	
 		// Build a drop down of pages
-		$this->CI->load->model('pages/pages_m');
+		$this->CI->load->model('pages/page_m');
 		
-		$tree = $this->CI->pages_m->get_page_tree();
+		$tree = $this->CI->page_m->get_page_tree();
 		
 		$dropdown = array();
 		
@@ -48,6 +53,13 @@ class Field_page
 
 	// --------------------------------------------------------------------------
 	
+	/**
+	 * Output for Admin
+	 *
+	 * @param	string
+	 * @param	array
+	 * @return	string
+	 */
 	function pre_output($input, $params)
 	{
 		if(!$input or !is_numeric($input)) return;
@@ -65,7 +77,14 @@ class Field_page
 
 	// --------------------------------------------------------------------------
 
-	function pre_output_plugin($prefix, $input, $params)
+	/**
+	 * Output form input
+	 *
+	 * @param	string
+	 * @param	array
+	 * @return	array
+	 */
+	function pre_output_plugin($input, $params)
 	{
 		if(!$input or !is_numeric($input)) return;
 	
@@ -79,13 +98,13 @@ class Field_page
 		
 		$this->CI->load->helper('url');
 		
-		$page_data[rtrim($prefix, '.')] = site_url($row->uri);
-		$page_data[$prefix.'slug']		= $row->slug;
-		$page_data[$prefix.'title']		= $row->title;
-		$page_data[$prefix.'id']		= $row->id;
-		$page_data[$prefix.'status']	= $row->status;
-		
-		return $page_data;
+		return array(
+			'link'		=> site_url($row->uri),
+			'slug'		=> $row->slug,
+			'title'		=> $row->id,
+			'id'		=> $row->id,
+			'status'	=> $row->status
+		);		
 	}
 	
 }
