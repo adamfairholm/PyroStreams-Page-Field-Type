@@ -27,28 +27,23 @@ class Field_page
 	/**
 	 * Output form input
 	 *
+	 * @access	public
 	 * @param	array
 	 * @param	array
+	 * @param	obj
 	 * @return	string
 	 */
-	public function form_output($data)
+	public function form_output($data, $params, $field)
 	{
-		$this->CI = get_instance();
-	
-		// Build a drop down of pages
-		$this->CI->load->model('pages/page_m');
+		$html = '<select name="'.$data['form_slug'].'" id="'.$data['form_slug'].'">';
 		
-		$tree = $this->CI->page_m->get_page_tree();
+		if($field->is_required == 'no'):
 		
-		$dropdown = array();
+			$html .= '<option value="">'.get_instance()->config->item('dropdown_choose_null').'</option>';
 		
-		foreach($tree as $tree_item):
+		endif;
 		
-			$dropdown[$tree_item['id']] = $tree_item['title'];
-		
-		endforeach;
-		
-		return '<select name="'.$data['form_slug'].'" id="'.$data['form_slug'].'">'.$this->_build_tree_select(array('current_id' => $data['value'])).'</select>';
+		return $html .= $this->_build_tree_select(array('current_id' => $data['value'])).'</select>';
 	}
 
 	// --------------------------------------------------------------------------
