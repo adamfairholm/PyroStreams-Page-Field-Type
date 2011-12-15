@@ -43,7 +43,7 @@ class Field_page
 		
 		endif;
 		
-		return $html .= $this->_build_tree_select(array('current_id' => $data['value'])).'</select>';
+		return $html .= $this->_build_tree_select(array('current_parent' => $data['value'])).'</select>';
 	}
 
 	// --------------------------------------------------------------------------
