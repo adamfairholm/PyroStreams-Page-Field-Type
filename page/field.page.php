@@ -18,7 +18,7 @@ class Field_page
 	
 	public $db_col_type				= 'int';
 
-	public $version					= '1.1';
+	public $version					= '1.1.1';
 
 	public $author					= array('name' => 'Parse19', 'url' => 'http://parse19.com');
 	
