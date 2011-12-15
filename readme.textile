@@ -4,6 +4,10 @@ This field type allows you to select a page from your PyroCMS page tree as a Pyr
 
 h2. Changelog
 
+_1.1.1 - December 15, 2011_
+
+* [Bug] Fixed bug where when editing an entry with a page field, the page field would not show the selected page as selected
+
 _1.1 - December 13, 2011_
 
 * [Updated] Updated to be compatible with PyroCMS 2.0 and PyroStreams 2.1
