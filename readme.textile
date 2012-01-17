@@ -28,9 +28,9 @@ h2. Usage
 After being assigned to a stream, the following variables are available in your layouts:
 
 |_. Variable |_. Notes |
-|{field_slug:link}|Full URL to the page|
-|{field_slug:slug}|Page URI slug|
-|{field_slug:title}|Page title|
-|{field_slug:id}|Page ID|
-|{field_slug:status}|Page status (draft or live)|
-|{field_slug:current}|Whether or not this is the current page. Returns true/false|
+|{{ field_slug:link }}|Full URL to the page|
+|{{ field_slug:slug }}|Page URI slug|
+|{{ field_slug:title }}|Page title|
+|{{ field_slug:id }}|Page ID|
+|{{ field_slug:status }}|Page status (draft or live)|
+|{{ field_slug:current }}|Whether or not this is the current page. Returns true/false|
