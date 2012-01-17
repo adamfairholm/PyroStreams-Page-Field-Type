@@ -4,6 +4,10 @@ This field type allows you to select a page from your PyroCMS page tree as a Pyr
 
 h2. Changelog
 
+_1.1.2 - January 17, 2011_
+
+* [New] Added current variable that returns true/false whether the current page is the selected page.
+
 _1.1.1 - December 15, 2011_
 
 * [Bug] Fixed bug where when editing an entry with a page field, the page field would not show the selected page as selected
@@ -29,3 +33,4 @@ After being assigned to a stream, the following variables are available in your 
 |{field_slug:title}|Page title|
 |{field_slug:id}|Page ID|
 |{field_slug:status}|Page status (draft or live)|
+|{field_slug:current}|Whether or not this is the current page. Returns true/false|
