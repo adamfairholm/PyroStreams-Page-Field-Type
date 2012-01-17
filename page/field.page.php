@@ -93,12 +93,16 @@ class Field_page
 		
 		$this->CI->load->helper('url');
 		
+		// Is this the current one?
+		$current = ( $row->uri == $this->CI->uri->uri_string() ) ? true : false;
+				
 		return array(
 			'link'		=> site_url($row->uri),
 			'slug'		=> $row->slug,
 			'title'		=> $row->id,
 			'id'		=> $row->id,
-			'status'	=> $row->status
+			'status'	=> $row->status,
+			'current'	=> $current
 		);		
 	}
 
