@@ -7,18 +7,17 @@
  *
  * @package		PyroStreams
  * @author		Parse19
- * @copyright	Copyright (c) 2011, Parse19
+ * @copyright	Copyright (c) 2011 - 2012, Parse19
  */
+
 class Field_page
 {
-
-	// --------------------------------------------------------------------------
 	 
 	public $field_type_slug			= 'page';
 	
 	public $db_col_type				= 'int';
 
-	public $version					= '1.1.1';
+	public $version					= '1.1.2';
 
 	public $author					= array('name' => 'Parse19', 'url' => 'http://parse19.com');
 	
@@ -184,5 +183,3 @@ class Field_page
 	}
 	
 }
-
-/* End of file field.page.php */
