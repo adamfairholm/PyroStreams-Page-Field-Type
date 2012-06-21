@@ -98,7 +98,7 @@ class Field_page
 		return array(
 			'link'		=> site_url($row->uri),
 			'slug'		=> $row->slug,
-			'title'		=> $row->id,
+			'title'		=> $row->title,
 			'id'		=> $row->id,
 			'status'	=> $row->status,
 			'current'	=> $current
