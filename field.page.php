@@ -3,13 +3,13 @@
 /**
  * PyroStreams Page Field Type
  *
- * Choose a page and return page data
+ * Choose a page from a drop down and return the page data.
  *
  * @package		PyroStreams
  * @author		Parse19
- * @copyright	Copyright (c) 2011 - 2012, Parse19
+ * @copyright	Copyright (c) 2011 - 2012, Adam Fairholm
+ * @link 		https://github.com/adamfairholm/PyroStreams-Page-Field-Type
  */
-
 class Field_page
 {
 	 
@@ -19,7 +19,9 @@ class Field_page
 
 	public $version					= '1.1.2';
 
-	public $author					= array('name' => 'Parse19', 'url' => 'http://parse19.com');
+	public $author					= array(
+										'name' => 'Adam Fairholm',
+										'url' => 'http://www.adamfairholm.com');
 	
 	// --------------------------------------------------------------------------
 
@@ -36,11 +38,10 @@ class Field_page
 	{
 		$html = '<select name="'.$data['form_slug'].'" id="'.$data['form_slug'].'">';
 		
-		if($field->is_required == 'no'):
-		
+		if ($field->is_required == 'no')
+		{
 			$html .= '<option value="">'.get_instance()->config->item('dropdown_choose_null').'</option>';
-		
-		endif;
+		}
 		
 		return $html .= $this->_build_tree_select(array('current_parent' => $data['value'])).'</select>';
 	}
@@ -50,57 +51,63 @@ class Field_page
 	/**
 	 * Output for Admin
 	 *
+	 * @access 	public
 	 * @param	string
 	 * @param	array
 	 * @return	string
 	 */
-	function pre_output($input, $params)
+	public function pre_output($input, $params)
 	{
-		if(!$input or !is_numeric($input)) return;
+		if ( ! $input or ! is_numeric($input)) return null;
 	
 		// Get the page
-		$this->CI = get_instance();
-		$obj = $this->CI->db->select('id, title')->limit(1)->where('id', $input)->get('pages');
+		$page = $this->CI->db
+						->limit(1)
+						->select('id, title')
+						->where('id', $input)
+						->get('pages')
+						->row();
 
-		if($obj->num_rows() == 0) return;
-		
-		$row = $obj->row();
-		
-		return '<a href="'.site_url('admin/pages/edit/'.$row->id).'">'.$row->title.'</a>';
+		if ( ! $page) return null;
+				
+		return '<a href="'.site_url('admin/pages/edit/'.$page->id).'">'.$page->title.'</a>';
 	}
 
 	// --------------------------------------------------------------------------
 
 	/**
-	 * Output form input
+	 * Tag output variables
 	 *
+	 * @access 	public
 	 * @param	string
 	 * @param	array
 	 * @return	array
 	 */
-	function pre_output_plugin($input, $params)
+	public function pre_output_plugin($input, $params)
 	{
-		if(!$input or !is_numeric($input)) return;
+		if ( ! $input or ! is_numeric($input)) return null;
 	
 		// Get the page
-		$this->CI = get_instance();
-		$obj = $this->CI->db->select('uri, slug, title, id, status')->limit(1)->where('id', $input)->get('pages');
+		$page = $this->CI->db
+						->limit(1)
+						->select('uri, slug, title, id, status')
+						->where('id', $input)
+						->get('pages')
+						->row();
 
-		if($obj->num_rows() == 0) return;
-		
-		$row = $obj->row();
+		if ( ! $page) return null;
 		
 		$this->CI->load->helper('url');
 		
 		// Is this the current one?
-		$current = ( $row->uri == $this->CI->uri->uri_string() ) ? true : false;
-				
+		$current = ($page->uri == $this->CI->uri->uri_string()) ? true : false;
+
 		return array(
-			'link'		=> site_url($row->uri),
-			'slug'		=> $row->slug,
-			'title'		=> $row->title,
-			'id'		=> $row->id,
-			'status'	=> $row->status,
+			'link'		=> site_url($page->uri),
+			'slug'		=> $page->slug,
+			'title'		=> $page->title,
+			'id'		=> $page->id,
+			'status'	=> $page->status,
 			'current'	=> $current
 		);		
 	}
@@ -115,10 +122,11 @@ class Field_page
 	 * This originally appears in the PyroCMS navigation
 	 * admin controller, but we need it here so here it is.
 	 *
+	 * @access 	private
 	 * @param	array
 	 * @return	array
 	 */
-	function _build_tree_select($params)
+	private function _build_tree_select($params)
 	{
 		$params = array_merge(array(
 			'tree'			=> array(),
