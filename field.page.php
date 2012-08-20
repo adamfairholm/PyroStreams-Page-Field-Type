@@ -17,7 +17,7 @@ class Field_page
 	
 	public $db_col_type				= 'int';
 
-	public $version					= '1.1.2';
+	public $version					= '1.1.3';
 
 	public $author					= array(
 										'name' => 'Adam Fairholm',

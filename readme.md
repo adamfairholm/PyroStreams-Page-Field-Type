@@ -1,4 +1,4 @@
-# PyroStreams Page Field Type v1.1.2
+# PyroStreams Page Field Type v1.1.3
 
 This field type allows you to select a page from your PyroCMS page tree as a PyroStreams field.
 
