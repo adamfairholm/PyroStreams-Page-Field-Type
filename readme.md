@@ -21,7 +21,7 @@ _1.1 - December 13, 2011_
 
 ## Installation
 
-If none exists, create a _field\_types_ folder in either _addons/<site-ref> or _addons/shared\_addons_. Create a folder called "pages" in your field\_types folder and add the file in this repo to that folder.
+If none exists, create a _field\_types_ folder in either _addons/<site-ref> or _addons/shared\_addons_. Create a folder called "page" in your field\_types folder and add the file in this repo to that folder.
 
 ## Usage
 
