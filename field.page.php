@@ -12,7 +12,8 @@
  */
 class Field_page
 {
-	 
+	public $field_type_name			= 'Page';
+	
 	public $field_type_slug			= 'page';
 	
 	public $db_col_type				= 'int';
