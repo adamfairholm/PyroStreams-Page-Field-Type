@@ -11,6 +11,7 @@
  */
 class Field_page
 {
+	
 	public $field_type_name			= 'Page';
 	
 	public $field_type_slug			= 'page';
@@ -26,10 +27,10 @@ class Field_page
 	/**
 	 * Output form input
 	 *
-	 * @param	array
-	 * @param	array
-	 * @param	obj
-	 * @return	string
+	 * @param	$data array
+	 * @param	$params array
+	 * @param	$field obj
+	 * @return	string The form input
 	 */
 	public function form_output($data, $params, $field)
 	{
@@ -45,8 +46,8 @@ class Field_page
 	/**
 	 * Output for Admin
 	 *
-	 * @param	string
-	 * @param	array
+	 * @param	$input string
+	 * @param	$params array
 	 * @return	string
 	 */
 	public function pre_output($input, $params)
@@ -71,8 +72,8 @@ class Field_page
 	/**
 	 * Tag output variables
 	 *
-	 * @param	string
-	 * @param	array
+	 * @param	$input string
+	 * @param	$params array
 	 * @return	array
 	 */
 	public function pre_output_plugin($input, $params)
@@ -92,11 +93,9 @@ class Field_page
 	}
 
 	/**
-	 * User Field Type Query Build Hook
+	 * Page Type Query Build Hook
 	 *
-	 * This joins our related fields so they don't have to
-	 * be queried separately in pre_output_plugin. Pre_output_plugin
-	 * now just formats the rows.
+	 * This left joins our page fields.
 	 *
 	 * @param 	array 	&$sql 	The sql array to add to.
 	 * @param 	obj 	$field 	The field obj
