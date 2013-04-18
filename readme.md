@@ -1,4 +1,4 @@
-# PyroStreams Page Field Type v1.1.3
+# PyroStreams Page Field Type 2.0
 
 This field type allows you to select a page from your PyroCMS page tree as a PyroStreams field.
 
@@ -6,7 +6,7 @@ This field type allows you to select a page from your PyroCMS page tree as a Pyr
 
 **2.0 - April 18, 2013**
 
-* Updating for 2.2 syntax, including a query hook
+* Now compatible with PyroCMS 2.2.x
 * Adding more available variables, including the anchor variable (see below)
 
 **1.2 - January 17, 2011**
@@ -26,7 +26,7 @@ This field type allows you to select a page from your PyroCMS page tree as a Pyr
 
 ## Installation
 
-If none exists, create a _field\_types_ folder in either _addons/<site-ref> or _addons/shared\_addons_. Create a folder called "page" in your field\_types folder and add the file in this repo to that folder.
+If it doesn't exist exists, create a _field\_types_ folder in either _addons/<site-ref> or _addons/shared\_addons_. Create a folder called "page" in your field\_types folder and add the file in this repo to that folder.
 
 ## Usage
 
