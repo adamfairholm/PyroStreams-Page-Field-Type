@@ -77,33 +77,50 @@ class Field_page
 	 */
 	public function pre_output_plugin($input, $params)
 	{
-		if ( ! $input or ! is_numeric($input)) {
-			return null;
-		}
-
-		// Get the page
-		$page = $this->CI->db
-						->limit(1)
-						->select('uri, slug, title, id, status')
-						->where('id', $input)
-						->get('pages')
-						->row();
-
-		if ( ! $page) return null;
-		
 		$this->CI->load->helper('url');
 		
 		// Is this the current one?
-		$current = ($page->uri == $this->CI->uri->uri_string()) ? true : false;
+		$input['current'] = ($input['uri'] == $this->CI->uri->uri_string()) ? true : false;
 
-		return array(
-			'link'		=> site_url($page->uri),
-			'slug'		=> $page->slug,
-			'title'		=> $page->title,
-			'id'		=> $page->id,
-			'status'	=> $page->status,
-			'current'	=> $current
-		);		
+		// Create a link
+		$input['link'] = site_url($input['uri']);
+
+		// Create anchor
+		$input['anchor'] = anchor($input['uri'], $input['title']);
+
+		return $input;
+	}
+
+	/**
+	 * User Field Type Query Build Hook
+	 *
+	 * This joins our related fields so they don't have to
+	 * be queried separately in pre_output_plugin. Pre_output_plugin
+	 * now just formats the rows.
+	 *
+	 * @param 	array 	&$sql 	The sql array to add to.
+	 * @param 	obj 	$field 	The field obj
+	 * @param 	obj 	$stream The stream object
+	 * @return 	void
+	 */
+	public function query_build_hook(&$sql, $field, $stream)
+	{
+		// Create a special alias for the users table.
+		$alias = 'pg_'.$field->field_slug;
+
+		$page_fields = array('id', 'slug', 'class', 'title', 'uri', 'parent_id',
+						'type_id', 'entry_id', 'css', 'js', 'meta_title', 'meta_keywords',
+						'meta_description', 'rss_enabled', 'comments_enabled', 'status',
+						'restricted_to', 'strict_uri', 'is_home', 'order');
+
+		foreach ($page_fields as $fld) {
+			$sql['select'][] = '`'.$alias.'`.`'.$fld.'` as `'.$field->field_slug.'||'.$fld.'`';
+		}
+
+		$sql['join'][] = 'LEFT JOIN '.
+				$this->CI->db->protect_identifiers('pages', true).' as `'.$alias.'` ON `'.
+				$alias.'`.`id`='.$this->CI->db->protect_identifiers(
+					$stream->stream_prefix.$stream->stream_slug.'.'.$field->field_slug, true);
 	}
 
 	/**
