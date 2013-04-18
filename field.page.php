@@ -5,8 +5,7 @@
  *
  * Choose a page from a drop down and return the page data.
  *
- * @package		PyroStreams
- * @author		Parse19
+ * @author		Adam Fairholm
  * @copyright	Copyright (c) 2011 - 2012, Adam Fairholm
  * @link 		https://github.com/adamfairholm/PyroStreams-Page-Field-Type
  */
@@ -18,18 +17,15 @@ class Field_page
 	
 	public $db_col_type				= 'int';
 
-	public $version					= '1.1.3';
+	public $version					= '2.0.0';
 
 	public $author					= array(
 										'name' => 'Adam Fairholm',
 										'url' => 'http://www.adamfairholm.com');
 	
-	// --------------------------------------------------------------------------
-
 	/**
 	 * Output form input
 	 *
-	 * @access	public
 	 * @param	array
 	 * @param	array
 	 * @param	obj
@@ -39,28 +35,26 @@ class Field_page
 	{
 		$html = '<select name="'.$data['form_slug'].'" id="'.$data['form_slug'].'">';
 		
-		if ($field->is_required == 'no')
-		{
+		if ($field->is_required == 'no') {
 			$html .= '<option value="">'.get_instance()->config->item('dropdown_choose_null').'</option>';
 		}
 		
 		return $html .= $this->_build_tree_select(array('current_parent' => $data['value'])).'</select>';
 	}
-
-	// --------------------------------------------------------------------------
 	
 	/**
 	 * Output for Admin
 	 *
-	 * @access 	public
 	 * @param	string
 	 * @param	array
 	 * @return	string
 	 */
 	public function pre_output($input, $params)
 	{
-		if ( ! $input or ! is_numeric($input)) return null;
-	
+		if ( ! $input or ! is_numeric($input)) {
+			return null;
+		}
+
 		// Get the page
 		$page = $this->CI->db
 						->limit(1)
@@ -74,20 +68,19 @@ class Field_page
 		return '<a href="'.site_url('admin/pages/edit/'.$page->id).'">'.$page->title.'</a>';
 	}
 
-	// --------------------------------------------------------------------------
-
 	/**
 	 * Tag output variables
 	 *
-	 * @access 	public
 	 * @param	string
 	 * @param	array
 	 * @return	array
 	 */
 	public function pre_output_plugin($input, $params)
 	{
-		if ( ! $input or ! is_numeric($input)) return null;
-	
+		if ( ! $input or ! is_numeric($input)) {
+			return null;
+		}
+
 		// Get the page
 		$page = $this->CI->db
 						->limit(1)
@@ -113,8 +106,6 @@ class Field_page
 		);		
 	}
 
-	// --------------------------------------------------------------------------
-
 	/**
 	 * Tree select function
 	 *
@@ -123,7 +114,6 @@ class Field_page
 	 * This originally appears in the PyroCMS navigation
 	 * admin controller, but we need it here so here it is.
 	 *
-	 * @access 	private
 	 * @param	array
 	 * @return	array
 	 */
@@ -139,38 +129,35 @@ class Field_page
 
 		extract($params);
 
-		if ( ! $tree)
-		{
-			if ($pages = $this->CI->db->select('id, parent_id, title')->get('pages')->result())
-			{
-				foreach($pages as $page)
-				{
+		if ( ! $tree) {
+			
+			if ($pages = $this->CI->db->select('id, parent_id, title')
+					->get('pages')->result()) {
+				
+				foreach($pages as $page) {
 					$tree[$page->parent_id][] = $page;
 				}
 			}
 		}
 
-		if ( ! isset($tree[$parent_id]))
-		{
+		if ( ! isset($tree[$parent_id])) {
 			return;
 		}
 
 		$html = '';
 
-		foreach ($tree[$parent_id] as $item)
-		{
-			if ($current_id == $item->id)
-			{
+		foreach ($tree[$parent_id] as $item) {
+
+			if ($current_id == $item->id) {
 				continue;
 			}
 
 			$html .= '<option value="' . $item->id . '"';
 			$html .= $current_parent == $item->id ? ' selected="selected">': '>';
 
-			if ($level > 0)
-			{
-				for ($i = 0; $i < ($level*2); $i++)
-				{
+			if ($level > 0) {
+
+				for ($i = 0; $i < ($level*2); $i++) {
 					$html .= '&nbsp;';
 				}
 
