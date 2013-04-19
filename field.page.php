@@ -6,7 +6,7 @@
  * Choose a page from a drop down and return the page data.
  *
  * @author		Adam Fairholm
- * @copyright	Copyright (c) 2011 - 2012, Adam Fairholm
+ * @copyright	Copyright (c) 2011 - 2013, Adam Fairholm
  * @link 		https://github.com/adamfairholm/PyroStreams-Page-Field-Type
  */
 class Field_page
