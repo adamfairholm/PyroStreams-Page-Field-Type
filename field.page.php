@@ -78,8 +78,12 @@ class Field_page
 	 */
 	public function pre_output_plugin($input, $params)
 	{
+		if ( ! is_array($input)) {
+			return array();
+		}
+
 		$this->CI->load->helper('url');
-		
+
 		// Is this the current one?
 		$input['current'] = ($input['uri'] == $this->CI->uri->uri_string()) ? true : false;
 
