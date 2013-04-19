@@ -1,8 +1,12 @@
-# PyroStreams Page Field Type 2.0
+# PyroStreams Page Field Type 2.0.1
 
 This field type allows you to select a page from your PyroCMS page tree as a PyroStreams field.
 
 ## Changelog
+
+**2.0.1 - April 19, 2013**
+
+* Adding proper data check to pre_output_plugin
 
 **2.0 - April 18, 2013**
 
